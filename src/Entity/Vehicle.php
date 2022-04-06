@@ -16,8 +16,8 @@ class Vehicle
     #[ORM\Column(type: 'datetime')]
     private $date_added;
 
-    #[ORM\Column(type: 'string', columnDefinition: "ENUM('used', 'new')", length: 255)]
-    private $type;
+    #[ORM\Column(type: 'string', enumType: VehicleType::class, length: 255)]
+    private VehicleType $type;
 
     #[ORM\Column(type: 'decimal', precision: 20, scale: 2)]
     private $msrp;
@@ -37,22 +37,15 @@ class Vehicle
     #[ORM\Column(type: 'string', length: 255)]
     private $vin;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
     private $deleted;
-/*
-    public function __construct($date_added, $type, $year,
-    $make, $model, $miles, $vin, $deleted)
+
+    public function __construct()
     {
-        $this->date_added = $date_added;
-        $this->type = $type;
-        $this->year = $year;
-        $this->make = $make;
-        $this->model = $model;
-        $this->miles = $miles;
-        $this->vin = $vin;
-        $this->deleted = $deleted;
+        // Set default value for type
+        $this->type = VehicleType::UsedCar;
     }
-*/
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,7 +63,7 @@ class Vehicle
         return $this;
     }
 
-    public function getType(): ?string
+    public function getType(): ?VehicleType
     {
         return $this->type;
     }
@@ -87,7 +80,7 @@ class Vehicle
         return $this->msrp;
     }
 
-    public function setMsrp(string $msrp): self
+    public function setMsrp(int $msrp): self
     {
         $this->msrp = $msrp;
 
