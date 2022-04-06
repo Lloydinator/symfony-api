@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 #[Route('/api', name: 'api_')]
 class VehicleController extends AbstractController
 {
-    #[Route('/vehicles', name: 'app_vehicle', method: 'get')]
+    #[Route('/vehicles', name: 'app_vehicle', methods: ['GET'])]
     public function index(VehicleRepository $vehicleRepository): Response
     {
         $vehicles = $vehicleRepository->findAll();
@@ -27,7 +27,7 @@ class VehicleController extends AbstractController
         ]);
     }
 
-    #[Route('/vehicle/show/{id}', name: 'vehicle_show', method: 'get')]
+    #[Route('/vehicle/show/{id}', name: 'vehicle_show', methods: ['GET'])]
     public function show(VehicleRepository $vehicleRepository, int $id): Response
     {
         $vehicle = $vehicleRepository->find($id);
@@ -50,7 +50,7 @@ class VehicleController extends AbstractController
         ], 200);
     }
 
-    #[Route('vehicle/create', name: 'vehicle_create', method: 'post')]
+    #[Route('vehicle/create', name: 'vehicle_create', methods: ['POST'])]
     public function create(ManagerRegistry $doctrine, Request $request, ValidatorInterface $validator): Response
     {
         $manager = $doctrine->getManager();
@@ -97,10 +97,11 @@ class VehicleController extends AbstractController
             'message' => 'Success!'
         ], 200);
     }
-
+/*
     #[Route('vehicle/edit/{id}', name: 'vehicle_edit')]
     public function edit(ManagerRegistry $doctrine, Request $request, ValidatorInterface $validator): Response
     {
         
     }
+*/
 }
