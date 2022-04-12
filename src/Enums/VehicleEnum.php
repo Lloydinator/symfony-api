@@ -1,7 +1,7 @@
 <?php
-namespace App\Entity;
+namespace App\Enums;
 
-enum VehicleType: string
+enum VehicleEnum: string
 {
     case UsedCar = 'used';
     case NewCar = 'new';

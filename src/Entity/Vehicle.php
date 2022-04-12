@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enums\VehicleEnum as VehicleType;
 use App\Repository\VehicleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -16,8 +17,8 @@ class Vehicle
     #[ORM\Column(type: 'datetime')]
     private $date_added;
 
-    #[ORM\Column(type: 'string', enumType: VehicleType::class, length: 255)]
-    private VehicleType $type;
+    #[ORM\Column(type: 'vehicle', length: 255)]
+    private ?VehicleType $type = null;
 
     #[ORM\Column(type: 'decimal', precision: 20, scale: 2)]
     private $msrp;
@@ -40,12 +41,6 @@ class Vehicle
     #[ORM\Column(type: 'boolean', options: ['default' => 0])]
     private $deleted;
 
-    public function __construct()
-    {
-        // Set default value for type
-        $this->type = VehicleType::UsedCar;
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -63,7 +58,7 @@ class Vehicle
         return $this;
     }
 
-    public function getType(): ?VehicleType
+    public function getType(): ?string
     {
         return $this->type;
     }

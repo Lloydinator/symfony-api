@@ -66,7 +66,7 @@ class VehicleController extends AbstractController
         $miles = $vehicle->setMiles($request->request->get('miles'));
         $vin = $vehicle->setVin($request->request->get('vin'));
 
-        
+       // dd($type);
         $input = [
             'type' => $type,
             'msrp' => $msrp,

@@ -17,7 +17,7 @@ class AppFixtures extends Fixture
             $vehicle = new Vehicle();
             $date = new \DateTime('@'.strtotime('now'));
             $vehicle->setDateAdded($date);
-            $vehicle->setType($car_types[rand(0, 2)]);
+            $vehicle->setMake($car_types[rand(0, 2)]);
             $vehicle->setMsrp(mt_rand(10000, 69999));
             $vehicle->setYear(mt_rand(1999, 2022));
             $vehicle->setModel($car_model[mt_rand(0, 4)]);
